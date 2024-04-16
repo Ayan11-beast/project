@@ -1,8 +1,6 @@
 package com.cognizant.assetmanagement.services;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +21,9 @@ public class AssetManagementServicesImpl implements AssetManagementServices {
 	private ResolutionsRepository resolutionsRepository;
 	@Autowired
 	private SupportRepository supportRepository;
+	
+	public AssetManagementServicesImpl() {
+	}
 	@Override
 	public String addAsset(AssetDetailsDTO assetDetailsDTO) {
 		AssetsRegister assetsRegister=new AssetsRegister();
@@ -92,8 +93,11 @@ public class AssetManagementServicesImpl implements AssetManagementServices {
 	@Override
 	public String writeResolution(int ticketId, String Resolution) {
 		List<TicketResolutions> list=resolutionsRepository.findAll();
+		System.out.println("List contents:"+list);
+		System.out.println("Ticket id:"+ticketId);
 		for(TicketResolutions resolutions:list) {
 			if(resolutions.getTicketId().getTicketId()==ticketId) {
+				System.out.println("checking ticket id"+ticketId);
 				resolutions.setResolutionDescription(Resolution);
 				if(resolutionsRepository.save(resolutions)!=null) {
 					return "success";

@@ -7,23 +7,25 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-@Entity(name="supporttickets")
+import jakarta.persistence.Table;
+@Entity
+@Table(name="Support_Tickets")
 public class SupportTickets {
 	@Id
-	@Column(name="ticketid")
+	@Column(name="Ticket_Id")
 	private int ticketId;
-	@Column(name="ticketraisedon")
+	@Column(name="Ticket_Raised_On")
 	private LocalDate ticketRaisedOn;
-	@Column(name="ticketraisedbyemployee")
+	@Column(name="Ticket_Raised_By_Employee")
 	private String ticketRaisedByEmployee;
 	@ManyToOne
-	@JoinColumn(name="assetid")
-	private AssetsRegister AssetId;
-	@Column(name="assignedtoemployee")
+	@JoinColumn(name="Asset_Id")
+	private AssetsRegister assetId;
+	@Column(name="Assigned_To_Employee")
 	private String assignedToEmployee;
-	@Column(name="expectedresolution")
+	@Column(name="Expected_Resolution")
 	private LocalDate expectedResolution;
-	@Column(name="ticketstatus")
+	@Column(name="Ticket_Status")
 	private String ticketStatus;
 	public int getTicketId() {
 		return ticketId;
@@ -44,10 +46,10 @@ public class SupportTickets {
 		this.ticketRaisedByEmployee = ticketRaisedByEmployee;
 	}
 	public AssetsRegister getAssetId() {
-		return AssetId;
+		return assetId;
 	}
 	public void setAssetId(AssetsRegister assetId) {
-		AssetId = assetId;
+		this.assetId = assetId;
 	}
 	public String getAssignedToEmployee() {
 		return assignedToEmployee;
@@ -67,6 +69,17 @@ public class SupportTickets {
 	public void setTicketStatus(String ticketStatus) {
 		this.ticketStatus = ticketStatus;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "SupportTickets{" +
+				"ticketId=" + ticketId +
+				", ticketRaisedOn=" + ticketRaisedOn +
+				", ticketRaisedByEmployee='" + ticketRaisedByEmployee + '\'' +
+				", assetId=" + assetId +
+				", assignedToEmployee='" + assignedToEmployee + '\'' +
+				", expectedResolution=" + expectedResolution +
+				", ticketStatus='" + ticketStatus + '\'' +
+				'}';
+	}
 }

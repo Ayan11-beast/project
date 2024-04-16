@@ -15,18 +15,20 @@ import com.cognizant.assetmanagement.models.AssetDetailsDTO;
 import com.cognizant.assetmanagement.models.SupportTicketDTO;
 import com.cognizant.assetmanagement.models.SupportTicketDetailsDTO;
 import com.cognizant.assetmanagement.services.AssetManagementServices;
+import com.cognizant.assetmanagement.services.AssetManagementServicesImpl;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("/api")
+
 public class AssetManagementController {
 
 	@Autowired
-	private AssetManagementServices assetManagementServices;
+	private AssetManagementServicesImpl assetManagementServices;
 
 	// EndPoint 1
-	@PostMapping("asset/register")
+	@PostMapping("/asset/register")
 	public ResponseEntity<?> handleAddAsset(@Valid @RequestBody AssetDetailsDTO assetDetailsDTO) {
 		String result = assetManagementServices.addAsset(assetDetailsDTO);
 		if (result.equals("success")) {
@@ -38,7 +40,7 @@ public class AssetManagementController {
 	}
 
 	// EndPoint 2
-	@PostMapping("supportrequests/new")
+	@PostMapping("/supportrequests/new")
 	public ResponseEntity<?> handleAddSupportTicket(@Valid @RequestBody SupportTicketDTO supportTicketDTO) {
 		String result = assetManagementServices.addSupportTicket(supportTicketDTO);
 		if (result.equals("success")) {
@@ -50,8 +52,9 @@ public class AssetManagementController {
 	}
 
 	// EndPoint 3
-	@GetMapping("supportrequests/{executiveid}")
+	@GetMapping("/supportrequests/{executiveid}")
 	public ResponseEntity<?> handleGetTicketsById(@PathVariable("executiveid") String executiveid) {
+		System.out.println(executiveid);
 		SupportTicketDTO dto = assetManagementServices.getTicketsById(executiveid);
 		ResponseEntity<SupportTicketDTO> responseEntity = null;
 		if (dto.getAssetId() != 0) {
@@ -63,7 +66,7 @@ public class AssetManagementController {
 	}
 
 	// EndPoint 4
-	@GetMapping("supportrequests/{ticketid}")
+	@GetMapping("/supportrequest/{ticketid}")
 	public ResponseEntity<?> handleGetAllSupportDetails(@PathVariable("ticketid") int ticketid) {
 		SupportTicketDetailsDTO dto = assetManagementServices.getAllSupportDetails(ticketid);
 		ResponseEntity<SupportTicketDetailsDTO> responseEntity = null;
@@ -75,16 +78,18 @@ public class AssetManagementController {
 		return responseEntity;
 	
 	}
-
-	// EndPoint 5
-//	@PutMapping("supportrequests/{ticketid}/resolve")
-//	public ResponseEntity<?> processReimbursements(@PathVariable("ticketid") int ticketid, @RequestBody String Resolution) {
-//		String result = assetManagementServices.writeResolution(ticketid, Resolution);
-//		if (result.equals("success")) {
-//			return new ResponseEntity<>("Updated", HttpStatus.ACCEPTED);
-//		} else {
-//			return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
-//		}
-//	}
+	 //EndPoint 5
+    @PutMapping("supportrequests/{ticketid}/resolve")
+	public ResponseEntity<?> processReimbursements(@PathVariable("ticketid") int ticketid, @RequestBody String Resolution) {
+		System.out.println(Resolution);
+		String result = assetManagementServices.writeResolution(ticketid, Resolution);
+		if (result.equals("success")) {
+			return new ResponseEntity<>("Updated", HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+		}
+	}
 
 }
+
+

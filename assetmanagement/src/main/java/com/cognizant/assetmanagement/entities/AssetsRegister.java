@@ -5,20 +5,23 @@ import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-@Entity(name="assetsregister")
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="Assets_Register")
 public class AssetsRegister {
 	@Id
-	@Column(name="assetid")
+	@Column(name="Asset_Id")
 	private int assetId;
-	@Column(name="issuedon")
+	@Column(name="Issued_On")
 	private LocalDate issuedOn;
-	@Column(name="issuedtoemployee")
+	@Column(name="Issued_To_Employee")
 	private String issuedToEmployee;
-	@Column(name="mobileno")
+	@Column(name="Mobile_No")
 	private String modelNo;
-	@Column(name="make")
+	@Column(name="Make")
 	private String make;
-	@Column(name="assettype")
+	@Column(name="Asset_Type")
 	private String assetType;
 	public int getAssetId() {
 		return assetId;

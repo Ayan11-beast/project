@@ -2,23 +2,20 @@ package com.cognizant.assetmanagement.entities;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
-@Entity(name="ticketresolutions")
+@Entity
+@Table(name="Ticket_Resolution")
 public class TicketResolutions {
 	@Id
-	@Column(name="id")
+	@Column(name="Id")
 	private int id;
 	@ManyToOne
-	@JoinColumn(name="ticketid")
+	@JoinColumn(name="Ticket_Id")
 	private SupportTickets ticketId;
-	@Column(name="resolutiondate")
+	@Column(name="Resolution_Date")
 	private LocalDate resolutionDate;
-	@Column(name="resolutiondescription")
+	@Column(name="Resolution_Description")
 	private String resolutionDescription;
 	public int getId() {
 		return id;
