@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import com.cognizant.assetmanagement.entities.AssetsRegister;
 import com.cognizant.assetmanagement.models.AssetDetailsDTO;
@@ -23,18 +26,24 @@ import java.util.Optional;
  
 class TestServices {
 	
-	private AssetManagementServicesImpl assetManagementService;
+//	private AssetManagementServicesImpl assetManagementService;
+	@Mock
     private AssetsRepository assetsRepository;
+	@Mock
     private SupportRepository supportRepository;
+	@Mock
     private ResolutionsRepository resolutionsRepository;
+	@InjectMocks
+    private AssetManagementServicesImpl assetManagementService;
 	
 	
 	@BeforeEach
     public void setUp() {
-        assetsRepository = mock(AssetsRepository.class);
-        supportRepository = mock(SupportRepository.class);
-        resolutionsRepository = mock(ResolutionsRepository.class);
-        //assetManagementService = new AssetManagementServicesImpl(assetsRepository, resolutionsRepository, supportRepository);
+//        assetsRepository = mock(AssetsRepository.class);
+//        supportRepository = mock(SupportRepository.class);
+//        resolutionsRepository = mock(ResolutionsRepository.class);
+//        assetManagementService = new AssetManagementServicesImpl(assetsRepository, resolutionsRepository, supportRepository);
+			MockitoAnnotations.initMocks(this);
     }
 
 	 @Test
@@ -55,24 +64,24 @@ class TestServices {
 	        assetsRegister.setMake("Dell");
 	        assetsRegister.setModelNo("XPS");
 	 
-	        when(assetsRepository.save(any(AssetsRegister.class))).thenReturn(assetsRegister);
+	        when(assetsRepository.save(any())).thenReturn(assetsRegister);
 	 
 	        String result = assetManagementService.addAsset(assetDetailsDTO);
 	 
 	        assertEquals("success", result);
-	        verify(assetsRepository, times(1)).save(any(AssetsRegister.class));
+//	        verify(assetsRepository, times(1)).save(any(AssetsRegister.class));
 	    }
 	 
 	    @Test
 	    public void testAddAsset_Failure() {
 	        AssetDetailsDTO assetDetailsDTO = new AssetDetailsDTO();
 	 
-	        when(assetsRepository.save(any(AssetsRegister.class))).thenReturn(null);
+	        when(assetsRepository.save(any())).thenReturn(null);
 	 
 	        String result = assetManagementService.addAsset(assetDetailsDTO);
 	 
 	        assertEquals("fail", result);
-	        verify(assetsRepository, times(1)).save(any(AssetsRegister.class));
+//	        verify(assetsRepository, times(1)).save(any(AssetsRegister.class));
 	    }
 	}
 

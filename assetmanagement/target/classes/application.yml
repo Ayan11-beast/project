@@ -18,3 +18,7 @@ spring:
         show-sql: true
     hibernate:
       ddl-auto: update
+
+      Spring:
+      application:
+      name: Profile-Management
