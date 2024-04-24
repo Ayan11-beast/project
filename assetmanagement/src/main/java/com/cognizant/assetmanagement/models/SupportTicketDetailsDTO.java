@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class SupportTicketDetailsDTO {
 
 	private int id;
-	
+
 	private int ticketId;
 
 	private LocalDate resolutionDate;
@@ -43,5 +43,14 @@ public class SupportTicketDetailsDTO {
 	public int getTicketId() {
 		return ticketId;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "SupportTicketDetailsDTO{" +
+				"id=" + id +
+				", ticketId=" + ticketId +
+				", resolutionDate=" + resolutionDate +
+				", resolutionDescription='" + resolutionDescription + '\'' +
+				'}';
+	}
 }

@@ -5,65 +5,76 @@ import java.time.LocalDate;
 
 public class AssetDetailsDTO {
 
-	private int AssetId;
+	private int assetId;
 
-	private LocalDate IssuedOn;
+	private LocalDate issuedOn;
 
-	private String IssuedToEmployee;
+	private String issuedToEmployee;
 
-	private String ModelNo;
+	private String modelNo;
 
-	private String Make;
+	private String make;
 
-	private String AssetType;
+	private String assetType;
+
 
 	public int getAssetId() {
-		return AssetId;
+		return assetId;
 	}
 
 	public void setAssetId(int assetId) {
-		AssetId = assetId;
+		this.assetId = assetId;
 	}
 
 	public LocalDate getIssuedOn() {
-		return IssuedOn;
+		return issuedOn;
 	}
 
 	public void setIssuedOn(LocalDate issuedOn) {
-		IssuedOn = issuedOn;
+		this.issuedOn = issuedOn;
 	}
 
 	public String getIssuedToEmployee() {
-		return IssuedToEmployee;
+		return issuedToEmployee;
 	}
 
 	public void setIssuedToEmployee(String issuedToEmployee) {
-		IssuedToEmployee = issuedToEmployee;
+		this.issuedToEmployee = issuedToEmployee;
 	}
 
 	public String getModelNo() {
-		return ModelNo;
+		return modelNo;
 	}
 
 	public void setModelNo(String modelNo) {
-		ModelNo = modelNo;
+		this.modelNo = modelNo;
 	}
 
 	public String getMake() {
-		return Make;
+		return make;
 	}
 
 	public void setMake(String make) {
-		Make = make;
+		this.make = make;
 	}
 
 	public String getAssetType() {
-		return AssetType;
+		return assetType;
 	}
 
 	public void setAssetType(String assetType) {
-		AssetType = assetType;
+		this.assetType = assetType;
 	}
-	
-	
+
+	@Override
+    public String toString() {
+        return "AssetDetailsDTO{" +
+                "qssetId=" + assetId +
+                ", issuedOn=" + issuedOn +
+                ", issuedToEmployee='" + issuedToEmployee + '\'' +
+                ", modelNo='" + modelNo + '\'' +
+                ", make='" + make + '\'' +
+                ", assetType='" + assetType + '\'' +
+                '}';
+    }
 }

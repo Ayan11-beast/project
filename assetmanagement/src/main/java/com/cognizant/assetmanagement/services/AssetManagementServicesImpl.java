@@ -1,5 +1,6 @@
 package com.cognizant.assetmanagement.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,6 +80,7 @@ public class AssetManagementServicesImpl implements AssetManagementServices {
 		List<TicketResolutions> list=resolutionsRepository.findAll();
 		for(TicketResolutions resolutions:list) {
 			if(resolutions.getTicketId().getTicketId()==ticketId) {
+				System.out.println("Ticket id:"+ticketId);
 				SupportTicketDetailsDTO dto=new SupportTicketDetailsDTO();
 				dto.setId(resolutions.getId());
 				dto.setResolutionDate(resolutions.getResolutionDate());
@@ -90,7 +92,7 @@ public class AssetManagementServicesImpl implements AssetManagementServices {
 		return null;
 	}
 
-	@Override
+	/*@Override
 	public String writeResolution(int ticketId, String Resolution) {
 		List<TicketResolutions> list=resolutionsRepository.findAll();
 		System.out.println("List contents:"+list);
@@ -105,6 +107,48 @@ public class AssetManagementServicesImpl implements AssetManagementServices {
 			}
 		}
 		return "fail";
+	}*/
+	@Override
+	public String writeResolution(int ticketId, SupportTicketDetailsDTO supportTicketDetailsDTO) {
+		//List<TicketResolutions> list=resolutionsRepository.findAll();
+		//System.out.println("List contents:"+list);
+		System.out.println("Ticket id:"+ticketId);
+		//for(TicketResolutions resolutions:list) {
+			//if(resolutions.getTicketId().getTicketId()==ticketId) {
+				System.out.println("checking ticket id"+ticketId);
+			TicketResolutions resolutions=new TicketResolutions();
+				SupportTickets supportTickets=supportRepository.findById(supportTicketDetailsDTO.getTicketId()).get();
+				supportTickets.setTicketStatus("Resolved");
+				supportRepository.save(supportTickets);
+				resolutions.setTicketId(supportTickets);
+				resolutions.setResolutionDate(supportTicketDetailsDTO.getResolutionDate());
+				resolutions.setResolutionDescription(supportTicketDetailsDTO.getResolutionDescription());
+				//resolutions.setResolutionDescription(Resolution);
+				if(resolutionsRepository.save(resolutions)!=null) {
+
+					return "success";
+				}
+
+
+		return "fail";
+	}
+	@Override
+	public List<SupportTicketDTO> getSupportTickets() {
+		List<SupportTickets> supportTickets=supportRepository.findAll();
+		List<SupportTicketDTO> supportTicketDTOList=new ArrayList<SupportTicketDTO>();
+		for(SupportTickets supportTicket:supportTickets ){
+			SupportTicketDTO supportTicketDTO=new SupportTicketDTO();
+			supportTicketDTO.setAssetId(supportTicket.getAssetId().getAssetId());
+			supportTicketDTO.setAssignedToEmployee(supportTicket.getAssignedToEmployee());
+			supportTicketDTO.setTicketRaisedOn(supportTicket.getTicketRaisedOn());
+			supportTicketDTO.setExpectedResolution(supportTicket.getExpectedResolution());
+			supportTicketDTO.setTicketStatus(supportTicket.getTicketStatus());
+			supportTicketDTO.setTicketId(supportTicket.getTicketId());
+			supportTicketDTO.setTicketRaisedByEmployee(supportTicket.getTicketRaisedByEmployee());
+			supportTicketDTOList.add(supportTicketDTO);
+
+		}
+		return supportTicketDTOList;
 	}
 
 }

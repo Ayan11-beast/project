@@ -3,74 +3,87 @@ package com.cognizant.assetmanagement.models;
 import java.time.LocalDate;
 
 public class SupportTicketDTO {
-	private int TicketId;
+	private int ticketId;
 
-	private LocalDate TicketRaisedOn;
+	private LocalDate ticketRaisedOn;
 
-	private String TicketRaisedByEmployee;
+	private String ticketRaisedByEmployee;
 
-	private int AssetId;
+	private int assetId;
 
-	private String AssignedToEmployee;
+	private String assignedToEmployee;
 
-	private LocalDate ExpectedResolution;
+	private LocalDate expectedResolution;
 
-	private String TicketStatus;
+	private String ticketStatus;
 
 	public int getTicketId() {
-		return TicketId;
+		return ticketId;
 	}
 
 	public void setTicketId(int ticketId) {
-		TicketId = ticketId;
+		this.ticketId = ticketId;
 	}
 
 	public LocalDate getTicketRaisedOn() {
-		return TicketRaisedOn;
+		return ticketRaisedOn;
 	}
 
 	public void setTicketRaisedOn(LocalDate ticketRaisedOn) {
-		TicketRaisedOn = ticketRaisedOn;
+		this.ticketRaisedOn = ticketRaisedOn;
 	}
 
 	public String getTicketRaisedByEmployee() {
-		return TicketRaisedByEmployee;
+		return ticketRaisedByEmployee;
 	}
 
 	public void setTicketRaisedByEmployee(String ticketRaisedByEmployee) {
-		TicketRaisedByEmployee = ticketRaisedByEmployee;
+		this.ticketRaisedByEmployee = ticketRaisedByEmployee;
 	}
 
 	public int getAssetId() {
-		return AssetId;
+		return assetId;
 	}
 
 	public void setAssetId(int assetId) {
-		AssetId = assetId;
+		this.assetId = assetId;
 	}
 
 	public String getAssignedToEmployee() {
-		return AssignedToEmployee;
+		return assignedToEmployee;
 	}
 
 	public void setAssignedToEmployee(String assignedToEmployee) {
-		AssignedToEmployee = assignedToEmployee;
+		this.assignedToEmployee = assignedToEmployee;
 	}
 
 	public LocalDate getExpectedResolution() {
-		return ExpectedResolution;
+		return expectedResolution;
 	}
 
 	public void setExpectedResolution(LocalDate expectedResolution) {
-		ExpectedResolution = expectedResolution;
+		this.expectedResolution = expectedResolution;
 	}
 
 	public String getTicketStatus() {
-		return TicketStatus;
+		return ticketStatus;
 	}
 
 	public void setTicketStatus(String ticketStatus) {
-		TicketStatus = ticketStatus;
+		this.ticketStatus = ticketStatus;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "SupportTicketDTO{" +
+				"ticketId=" + ticketId +
+				", ticketRaisedOn=" + ticketRaisedOn +
+				", ticketRaisedByEmployee='" + ticketRaisedByEmployee + '\'' +
+				", assetId=" + assetId +
+				", assignedToEmployee='" + assignedToEmployee + '\'' +
+				", expectedResolution=" + expectedResolution +
+				", ticketStatus='" + ticketStatus + '\'' +
+				'}';
+	}
 }
+
